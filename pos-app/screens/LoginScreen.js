@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     if (username === 'admin' && password === '1234') {
-      alert('Login Successful');
+      navigation.navigate('OpenRegister');
     } else {
       alert('Incorrect username or password.');
     }
   };
+  
 
   return (
     <View style={styles.container}>
