@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
 
-export default function OpenRegisterScreen() {
+export default function OpenRegisterScreen({ navigation }) {
+
   const [coins, setCoins] = useState(Array(8).fill('0.00'));
   const [bills, setBills] = useState(Array(5).fill('0.00'));
   const [notes, setNotes] = useState('');
 
   const handleSubmit = () => {
-    alert('Register opened successfully!');
+    window.alert('You have successfully opened the register!');
+    navigation.navigate('StartSale');
   };
+  
 
   const handleKickDrawer = () => {
-    alert('Drawer kicked open!');
+    window.alert('The cash drawer has been kicked open!');
+  };
+
+  const handleSetBillsToZero = () => {
+    const resetBills = bills.map(() => '0.00');
+    setBills(resetBills);
+    window.alert('All bill fields have been reset to 0.00!');
   };
 
   return (
@@ -64,7 +73,7 @@ export default function OpenRegisterScreen() {
       {/* Set Bills Section */}
       <View style={styles.sectionTitles}>
         <Text style={styles.sectionTitle}>BILLS</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSetBillsToZero}>
           <Text style={styles.setBillsZero}>Set Bills to 0</Text>
         </TouchableOpacity>
       </View>
