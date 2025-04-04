@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'; // 👈 THIS LINE IS VERY IMPORTANT
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState('');
@@ -7,48 +7,93 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     if (username === 'admin' && password === '1234') {
-      Alert.alert('Login Successful', 'Welcome to POS!');
-      // Example: navigation.navigate('OpenRegisterScreen');
+      alert('Login Successful');
     } else {
-      Alert.alert('Login Failed', 'Incorrect username or password.');
+      alert('Incorrect username or password.');
     }
   };
 
   return (
-    <View style={styles.desktop}>
-      <View style={styles.div}>
-        <View style={styles.overlap}>
-          <View style={styles.ellipse} />
-          <Text style={styles.textWrapper}>SR</Text>
-        </View>
+    <View style={styles.container}>
+      {/* Orange Circle with SR */}
+      <View style={styles.circle}>
+        <Text style={styles.circleText}>SR</Text>
+      </View>
 
-        {/* Login Form */}
-        <View style={styles.loginForm}>
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            placeholderTextColor="#999"
-            value={username}
-            onChangeText={setUsername}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#999"
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-            <Text style={styles.loginButtonText}>Login</Text>
-          </TouchableOpacity>
-        </View>
-
+      {/* Username / Password form */}
+      <View style={styles.loginBox}>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="#999"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#999"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <Text style={styles.loginButtonText}>Login</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  // Your StyleSheet.create() here (already sent)
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  circle: {
+    backgroundColor: '#cd6625',
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 50,
+  },
+  circleText: {
+    color: '#ffffff',
+    fontSize: 64,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+  },
+  loginBox: {
+    width: '100%',
+    maxWidth: 400,
+    backgroundColor: '#d9d9d9',
+    borderRadius: 10,
+    padding: 20,
+  },
+  input: {
+    height: 50,
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    fontSize: 16,
+    color: '#333',
+  },
+  loginButton: {
+    backgroundColor: '#cd6625',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
